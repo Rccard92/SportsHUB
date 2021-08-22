@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.BottomNavigation?>
+<?import com.gluonhq.charm.glisten.control.BottomNavigationButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="730.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="soccerHUB.ControllerViewStorico">
+    <children>
+        <Pane prefHeight="160.0" prefWidth="950.0" style="-fx-background-color: #45b28a;">
+            <children>
+                <BottomNavigation layoutX="36.0" layoutY="165.0" />
+                <BottomNavigationButton fx:id="viewPrenotazione" layoutX="694.0" layoutY="46.0" onAction="#switchToViewBooking" prefHeight="69.0" prefWidth="242.0" style="-fx-background-color: #307C60; -fx-background-radius: 10;" text="VISUALIZZA PRENOTAZIONI" textAlignment="CENTER" textFill="WHITE">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <graphic>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/search.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font name="Bauhaus 93" size="16.0" />
+                    </font>
+                </BottomNavigationButton>
+                <BottomNavigationButton fx:id="addPrenotazione" layoutX="440.0" layoutY="46.0" onAction="#switchToAddBooking" prefHeight="69.0" prefWidth="232.0" style="-fx-background-color: #307C60; -fx-background-radius: 10;" text="AGGIUNGI PRENOTAZIONE" textAlignment="CENTER" textFill="WHITE">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <graphic>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/plusa.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font name="Bauhaus 93" size="16.0" />
+                    </font>
+                </BottomNavigationButton>
+                <ImageView fitHeight="190.0" fitWidth="290.0" layoutX="-4.0" layoutY="-15.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../resources/sports-hub.png" />
+                    </image>
+                </ImageView>
+                <BottomNavigation layoutX="47.0" layoutY="453.0" />
+            <BottomNavigationButton fx:id="home" layoutX="286.0" layoutY="46.0" onAction="#switchToHome" prefHeight="69.0" prefWidth="130.0" style="-fx-background-color: #307C60; -fx-background-radius: 10;" text="HOME" textAlignment="CENTER" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../resources/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Bauhaus 93" size="16.0" />
+               </font>
+            </BottomNavigationButton>
+            </children>
+        </Pane>
+        <Label layoutX="339.0" layoutY="172.0" prefHeight="35.0" prefWidth="273.0" text="Storico Prenotazioni">
+            <font>
+                <Font name="Bauhaus 93" size="30.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tableStoricoHomeCalcio" layoutX="20.0" layoutY="242.0" prefHeight="190.0" prefWidth="910.0">
+            <columns>
+                <TableColumn fx:id="colID" maxWidth="80.0" prefWidth="38.39996337890625" resizable="false" text="ID" />
+                <TableColumn fx:id="colNome" maxWidth="300.0" prefWidth="130.39995956420898" resizable="false" text="NOME" />
+                <TableColumn fx:id="colClasse" maxWidth="131.2000274658203" prefWidth="64.00003051757812" resizable="false" text="CLASSE" />
+                <TableColumn fx:id="colCampo" maxWidth="120.0" prefWidth="111.20002746582031" resizable="false" text="CAMPO" />
+                <TableColumn fx:id="colData" maxWidth="200.0" prefWidth="113.5999755859375" resizable="false" text="DATA" />
+                <TableColumn fx:id="colOra" maxWidth="157.5999755859375" prefWidth="77.5999755859375" resizable="false" text="ORA" />
+            <TableColumn fx:id="colCell" maxWidth="300.0" prefWidth="109.5999755859375" resizable="false" text="CELLULARE" />
+            <TableColumn fx:id="colMail" maxWidth="380.0" prefWidth="260.0" resizable="false" text="E-MAIL" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+      <Label layoutX="20.0" layoutY="207.0" prefHeight="35.0" prefWidth="144.0" text="Campi di calcio">
+         <font>
+            <Font name="Bauhaus 93" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="432.0" prefHeight="35.0" prefWidth="160.0" text="Campi di pallavolo">
+         <font>
+            <Font name="Bauhaus 93" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableStoricoHomePallavolo" layoutX="20.0" layoutY="474.0" prefHeight="190.0" prefWidth="910.0">
+         <columns>
+            <TableColumn fx:id="colID1" maxWidth="80.0" prefWidth="38.39996337890625" resizable="false" text="ID" />
+            <TableColumn fx:id="colNome1" maxWidth="300.0" prefWidth="130.0" resizable="false" text="NOME" />
+            <TableColumn fx:id="colClasse1" maxWidth="131.0" prefWidth="64.0" resizable="false" text="CLASSE" />
+            <TableColumn fx:id="colCampo1" maxWidth="120.0" prefWidth="111.0" resizable="false" text="CAMPO" />
+            <TableColumn fx:id="colData1" maxWidth="200.0" prefWidth="113.0" resizable="false" text="DATA" />
+            <TableColumn fx:id="colOra1" maxWidth="157.0" prefWidth="77.0" resizable="false" text="ORA" />
+            <TableColumn fx:id="colCell1" maxWidth="300.0" prefWidth="109.0" resizable="false" text="CELLULARE" />
+            <TableColumn fx:id="colMail1" maxWidth="380.0" prefWidth="260.0" resizable="false" text="E-MAIL" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+    </children>
+</AnchorPane>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.BottomNavigationButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="730.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="soccerHUB.ControllerEditBooking">
+    <children>
+        <Pane prefHeight="160.0" prefWidth="950.0" style="-fx-background-color: #45b28a;">
+            <children>
+                <ImageView fitHeight="190.0" fitWidth="290.0" layoutX="-4.0" layoutY="-15.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../resources/sports-hub.png" />
+                    </image>
+                </ImageView>
+            <Label layoutX="377.0" layoutY="59.0" prefHeight="42.0" prefWidth="444.0" text="Modifica Prenotazione" textFill="WHITE">
+               <font>
+                  <Font name="Bauhaus 93" size="36.0" />
+               </font>
+            </Label>
+            </children>
+        </Pane>
+        <BottomNavigationButton layoutX="44.0" layoutY="628.0" onAction="#save" prefHeight="69.0" prefWidth="256.0" style="-fx-background-color: #307C60; -fx-background-radius: 10;" text="AGGIORNA PRENOTAZIONE" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <graphic>
+                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../resources/plusa.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <font>
+                <Font name="Bauhaus 93" size="16.0" />
+            </font>
+        </BottomNavigationButton>
+        <Pane layoutX="378.0" layoutY="181.0" prefHeight="430.0" prefWidth="300.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-border-color: #307C60;">
+            <children>
+                <Label layoutX="23.0" layoutY="36.0" prefHeight="35.0" prefWidth="255.0" text="NOME REFERENTE">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txt_nome" layoutX="23.0" layoutY="71.0" prefHeight="30.0" prefWidth="200.0" promptText="Inserire nome referente" />
+                <Label layoutX="23.0" layoutY="121.0" prefHeight="35.0" prefWidth="255.0" text="CLASSE">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txt_classe" layoutX="23.0" layoutY="165.0" prefHeight="30.0" prefWidth="200.0" promptText="Inserire classe" />
+                <Label layoutX="23.0" layoutY="224.0" prefHeight="35.0" prefWidth="255.0" text="NUMERO DI TELEFONO">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txt_number" layoutX="23.0" layoutY="274.0" prefHeight="30.0" prefWidth="200.0" promptText="Inserire numero di telefono" />
+                <Label layoutX="23.0" layoutY="321.0" prefHeight="35.0" prefWidth="255.0" text="E-MAIL">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txt_mail" layoutX="23.0" layoutY="369.0" prefHeight="30.0" prefWidth="200.0" promptText="Inserire contatto e-mail" />
+            </children>
+        </Pane>
+        <Pane layoutX="44.0" layoutY="181.0" prefHeight="430.0" prefWidth="300.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3; -fx-border-color: #307C60;">
+            <children>
+                <Label layoutX="23.0" layoutY="36.0" prefHeight="35.0" prefWidth="255.0" text="SELEZIONA LA DATA">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="addData" layoutX="23.0" layoutY="81.0" prefHeight="30.0" prefWidth="200.0" />
+                <Label fx:id="myLabelOrario" layoutX="23.0" layoutY="124.0" prefHeight="35.0" prefWidth="255.0" text="SELEZIONE L'ORARIO">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <ChoiceBox fx:id="myChoiceBoxCampo" layoutX="23.0" layoutY="266.0" prefHeight="30.0" prefWidth="200.0" />
+                <Label layoutX="23.0" layoutY="222.0" prefHeight="35.0" prefWidth="255.0" text="SELEZIONA IL CAMPO">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <ChoiceBox fx:id="myChoiceBoxOrario" layoutX="23.0" layoutY="172.0" prefHeight="30.0" prefWidth="200.0" />
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
