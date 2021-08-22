@@ -116,7 +116,6 @@ public class ControllerAddBooking implements Initializable {
   }
 
   public void data_event(ActionEvent event) {
-
     LocalDate mydate = addData.getValue();
     myComboBoxOrario.setDisable(mydate.toString().isEmpty());
   }
@@ -147,7 +146,7 @@ public class ControllerAddBooking implements Initializable {
         for (String pluto : campo) {
           if (!pippo.equals(pluto)) {
             nuovaListaCampiNonOccupati.add(pippo);
-            myComboBoxCampo.setItems(nuovaListaCampiNonOccupati);
+      myComboBoxCampo.setItems(nuovaListaCampiNonOccupati);
           }
         }
       }

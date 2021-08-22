@@ -25,6 +25,7 @@ import javafx.util.Callback;
 import soccerHUB.utility.ConnectDB;
 import soccerHUB.utility.Storico;
 import sun.util.resources.CalendarData;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -162,7 +163,8 @@ public class ControllerViewBooking implements Initializable {
                             storico = tableStoricoBooking.getSelectionModel().getSelectedItem();
                             query = "DELETE FROM storico WHERE ID = " + storico.getId();
                             conn = ConnectDB.getConnect();
-                            pst = conn.prepareStatement(query);
+                              assert conn != null;
+                              pst = conn.prepareStatement(query);
                             pst.execute();
                             refreshTable();
 
