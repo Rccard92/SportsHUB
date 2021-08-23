@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 
 public class ConnectDB {
 
-  // CREAZIONE METODO PER LA CONNESSIONE AL DATABASE
+  // CREAZIONE METODO PER LA CONNESSIONE AL DATABASE AWS AMAZON
 
   public static Connection getConnect() {
     try {
@@ -24,6 +24,7 @@ public class ConnectDB {
     }
   }
 
+  // CONNESSIONE IN LOCALHOST A DB MYSQL
   /*public static Connection getConnect() {
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");

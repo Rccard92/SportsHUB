@@ -5,25 +5,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import soccerHUB.utility.ConnectDB;
 import soccerHUB.utility.Storico;
+import soccerHUB.utility.Switch;
 import sun.util.resources.CalendarData;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,7 +45,7 @@ public class ControllerHome implements Initializable {
   @FXML private TableColumn<Storico, CalendarData> colData1;
   @FXML private TableColumn<Storico, Integer> colCell1;
   @FXML private TableColumn<Storico, String> colMail1;
-  private Stage stage;
+
   String query = null;
   Connection conn = null;
   ResultSet rs = null;
@@ -61,23 +57,13 @@ public class ControllerHome implements Initializable {
   @FXML TableView<Storico> tableStoricoHomePallavolo;
 
   public void switchToAddBooking(ActionEvent event) throws IOException {
-    Parent root =
-        FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/AddBooking.fxml")));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+    Switch switcha = new Switch();
+    switcha.switchToAddBooking(event);
   }
 
   public void switchToViewBooking(ActionEvent event) throws IOException {
-    Parent root =
-        FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/ViewBooking.fxml")));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+    Switch switcha = new Switch();
+    switcha.switchToViewBooking(event);
   }
 
   // METODO AGGIORNAMENTO TABELLA CALCIO
@@ -87,8 +73,7 @@ public class ControllerHome implements Initializable {
     try {
       listHomeCalcio.clear();
 
-      query =
-          "SELECT * FROM `storico` WHERE `data`= CURRENT_DATE AND `campo` BETWEEN 1 AND 5";
+      query = "SELECT * FROM `storico` WHERE `data`= CURRENT_DATE AND `campo` BETWEEN 1 AND 5";
       pst = conn.prepareStatement(query);
       rs = pst.executeQuery();
 
@@ -117,8 +102,7 @@ public class ControllerHome implements Initializable {
     try {
       listHomePallavolo.clear();
 
-      query =
-          "SELECT * FROM `storico` WHERE `data`= CURRENT_DATE AND `campo` BETWEEN 6 AND 9";
+      query = "SELECT * FROM `storico` WHERE `data`= CURRENT_DATE AND `campo` BETWEEN 6 AND 9";
       pst = conn.prepareStatement(query);
       rs = pst.executeQuery();
 
@@ -144,6 +128,14 @@ public class ControllerHome implements Initializable {
   public void initialize(URL url, ResourceBundle rb) {
     conn = ConnectDB.getConnect();
     refreshTableCalcio();
+    setCellValueFactory();
+    refreshTablePallavolo();
+    setCellValueFactory1();
+    tableStoricoHomeCalcio.setItems(listHomeCalcio);
+    tableStoricoHomePallavolo.setItems(listHomePallavolo);
+  }
+
+  public void setCellValueFactory() {
     colID.setCellValueFactory(new PropertyValueFactory<>("id"));
     colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
     colClasse.setCellValueFactory(new PropertyValueFactory<>("classe"));
@@ -152,8 +144,9 @@ public class ControllerHome implements Initializable {
     colOra.setCellValueFactory(new PropertyValueFactory<>("ora"));
     colCell.setCellValueFactory(new PropertyValueFactory<>("cellulare"));
     colMail.setCellValueFactory(new PropertyValueFactory<>("mail"));
+  }
 
-    refreshTablePallavolo();
+  public void setCellValueFactory1() {
     colID1.setCellValueFactory(new PropertyValueFactory<>("id"));
     colNome1.setCellValueFactory(new PropertyValueFactory<>("nome"));
     colClasse1.setCellValueFactory(new PropertyValueFactory<>("classe"));
@@ -162,10 +155,5 @@ public class ControllerHome implements Initializable {
     colOra1.setCellValueFactory(new PropertyValueFactory<>("ora"));
     colCell1.setCellValueFactory(new PropertyValueFactory<>("cellulare"));
     colMail1.setCellValueFactory(new PropertyValueFactory<>("mail"));
-
-    // listHomeCalcio = ConnectDB.getDataStorico(listHomeCalcio);
-    tableStoricoHomeCalcio.setItems(listHomeCalcio);
-    // listHomePallavolo = ConnectDB.getDataStorico(listHomePallavolo);
-    tableStoricoHomePallavolo.setItems(listHomePallavolo);
   }
 }

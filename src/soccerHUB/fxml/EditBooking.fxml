@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="730.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="soccerHUB.ControllerEditBooking">
     <children>
         <Pane prefHeight="160.0" prefWidth="950.0" style="-fx-background-color: #45b28a;">
@@ -84,13 +85,13 @@
                         <Font size="22.0" />
                     </font>
                 </Label>
-                <ChoiceBox fx:id="myChoiceBoxCampo" layoutX="23.0" layoutY="266.0" prefHeight="30.0" prefWidth="200.0" />
+                <ComboBox fx:id="myComboBoxCampo" layoutX="23.0" layoutY="266.0" prefHeight="30.0" prefWidth="200.0" />
                 <Label layoutX="23.0" layoutY="222.0" prefHeight="35.0" prefWidth="255.0" text="SELEZIONA IL CAMPO">
                     <font>
                         <Font size="22.0" />
                     </font>
                 </Label>
-                <ChoiceBox fx:id="myChoiceBoxOrario" layoutX="23.0" layoutY="172.0" prefHeight="30.0" prefWidth="200.0" />
+                <ComboBox fx:id="myComboBoxOrario" layoutX="23.0" layoutY="172.0" prefHeight="30.0" prefWidth="200.0" />
             </children>
         </Pane>
     </children>

@@ -14,8 +14,10 @@ public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/Home.fxml")));
-    primaryStage.initStyle(StageStyle.UNDECORATED);
+    Parent root =
+        FXMLLoader.load(
+            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/Home.fxml")));
+    primaryStage.initStyle(StageStyle.UNDECORATED); // RIMOZIONE BARRA DEGLI STRUMENTI
     primaryStage.setTitle("Sports HUB");
     primaryStage.setResizable(false);
     Image icon = new Image("/soccerHUB/resources/favicon.png");

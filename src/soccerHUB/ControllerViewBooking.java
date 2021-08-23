@@ -24,6 +24,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import soccerHUB.utility.ConnectDB;
 import soccerHUB.utility.Storico;
+import soccerHUB.utility.Switch;
 import sun.util.resources.CalendarData;
 
 import java.io.IOException;
@@ -62,33 +63,23 @@ public class ControllerViewBooking implements Initializable {
   ObservableList<Storico> listViewBooking = FXCollections.observableArrayList();
 
   public void switchToHome(ActionEvent event) throws IOException {
-    Parent root =
-        FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/Home.fxml")));
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+    Switch switcha = new Switch();
+    switcha.switchToHome(event);
   }
 
   public void switchToAddBooking(ActionEvent event) throws IOException {
+    Switch switcha = new Switch();
+    switcha.switchToAddBooking(event);
+  }
+
+  public void switchToStorico(ActionEvent event) throws IOException {
     Parent root =
         FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/AddBooking.fxml")));
+            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/ViewStorico.fxml")));
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
-  }
-
-  public void switchToStorico(ActionEvent event) throws IOException {
-      Parent root =
-              FXMLLoader.load(
-                      Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/ViewStorico.fxml")));
-      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      Scene scene = new Scene(root);
-      stage.setScene(scene);
-      stage.show();
   }
 
   // METODO AGGIORNAMENTO TABELLA
@@ -163,8 +154,8 @@ public class ControllerViewBooking implements Initializable {
                             storico = tableStoricoBooking.getSelectionModel().getSelectedItem();
                             query = "DELETE FROM storico WHERE ID = " + storico.getId();
                             conn = ConnectDB.getConnect();
-                              assert conn != null;
-                              pst = conn.prepareStatement(query);
+                            assert conn != null;
+                            pst = conn.prepareStatement(query);
                             pst.execute();
                             refreshTable();
 
@@ -206,11 +197,11 @@ public class ControllerViewBooking implements Initializable {
                           stage.show();
                         });
 
-                    HBox managebtn = new HBox(editIcon, deleteIcon);
-                    managebtn.setStyle("-fx-alignament:center");
+                    HBox btnPosition = new HBox(editIcon, deleteIcon);
+                    btnPosition.setStyle("-fx-alignament:center");
                     HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
                     HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
-                    setGraphic(managebtn);
+                    setGraphic(btnPosition);
                     setText(null);
                   }
                 }
@@ -218,7 +209,6 @@ public class ControllerViewBooking implements Initializable {
 
           return cell;
         };
-    // listViewBooking = ConnectDB.getDataStorico(listViewBooking);
     colEdit.setCellFactory(cellFactory);
     tableStoricoBooking.setItems(listViewBooking);
   }

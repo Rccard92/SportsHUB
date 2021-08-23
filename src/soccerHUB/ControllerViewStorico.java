@@ -5,17 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import soccerHUB.utility.ConnectDB;
 import soccerHUB.utility.Storico;
+import soccerHUB.utility.Switch;
 import sun.util.resources.CalendarData;
 
 import java.io.IOException;
@@ -24,7 +20,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +45,7 @@ public class ControllerViewStorico implements Initializable {
   @FXML private TableColumn<Storico, CalendarData> colData1;
   @FXML private TableColumn<Storico, Integer> colCell1;
   @FXML private TableColumn<Storico, String> colMail1;
-  private Stage stage;
+
   String query = null;
   Connection conn = null;
   ResultSet rs = null;
@@ -62,33 +57,18 @@ public class ControllerViewStorico implements Initializable {
   @FXML TableView<Storico> tableStoricoHomePallavolo;
 
   public void switchToHome(ActionEvent event) throws IOException {
-    Parent root =
-            FXMLLoader.load(
-                    Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/Home.fxml")));
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+    Switch switcha = new Switch();
+    switcha.switchToHome(event);
   }
 
   public void switchToAddBooking(ActionEvent event) throws IOException {
-    Parent root =
-        FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/AddBooking.fxml")));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+    Switch switcha = new Switch();
+    switcha.switchToAddBooking(event);
   }
 
   public void switchToViewBooking(ActionEvent event) throws IOException {
-    Parent root =
-        FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/ViewBooking.fxml")));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+    Switch switcha = new Switch();
+    switcha.switchToViewBooking(event);
   }
 
   // METODO AGGIORNAMENTO TABELLA CALCIO
@@ -153,7 +133,7 @@ public class ControllerViewStorico implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    conn = ConnectDB.getConnect();
+   conn = ConnectDB.getConnect();
     refreshTableCalcio();
     colID.setCellValueFactory(new PropertyValueFactory<>("id"));
     colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -174,11 +154,7 @@ public class ControllerViewStorico implements Initializable {
     colCell1.setCellValueFactory(new PropertyValueFactory<>("cellulare"));
     colMail1.setCellValueFactory(new PropertyValueFactory<>("mail"));
 
-    // listHomeCalcio = ConnectDB.getDataStorico(listHomeCalcio);
     tableStoricoHomeCalcio.setItems(listHomeCalcio);
-    // listHomePallavolo = ConnectDB.getDataStorico(listHomePallavolo);
     tableStoricoHomePallavolo.setItems(listHomePallavolo);
   }
-
-
 }

@@ -4,17 +4,13 @@ import com.gluonhq.charm.glisten.control.BottomNavigationButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import soccerHUB.utility.ConnectDB;
+import soccerHUB.utility.Switch;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -24,7 +20,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ControllerAddBooking implements Initializable {
@@ -46,23 +41,13 @@ public class ControllerAddBooking implements Initializable {
   PreparedStatement pst = null;
 
   public void switchToViewBooking(ActionEvent event) throws IOException {
-    Parent root =
-        FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/ViewBooking.fxml")));
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+    Switch switcha = new Switch();
+    switcha.switchToViewBooking(event);
   }
 
   public void switchToHome(ActionEvent event) throws IOException {
-    Parent root =
-        FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/soccerHUB/fxml/Home.fxml")));
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+    Switch switcha = new Switch();
+    switcha.switchToHome(event);
   }
 
   public void Add_users(ActionEvent event) {
@@ -115,18 +100,22 @@ public class ControllerAddBooking implements Initializable {
     this.myComboBoxCampoMemory.getItems().addAll(this.myComboBoxCampo.getItems());
   }
 
+  // METODO DI CONTROLLO PER IL COMBOBOX ORARIO
   public void data_event(ActionEvent event) {
     LocalDate mydate = addData.getValue();
     myComboBoxOrario.setDisable(mydate.toString().isEmpty());
   }
 
+  // METODO DI CONTROLLO PER IL COMBOBOX CAMPO CON VERIFICA DI CAMPI GIA' OCCUPATI IN BASE ALLA
+  // QUERY
   public void comboOraEvent(ActionEvent event) {
     this.myComboBoxCampo.setItems(this.myComboBoxCampoMemory.getItems());
     String myOra = myComboBoxOrario.getValue();
     myComboBoxCampo.setDisable(myOra.isEmpty());
 
     ObservableList<String> campo = FXCollections.observableArrayList();
-    ObservableList<String> nuovaListaCampiNonOccupati = FXCollections.observableArrayList();
+    ObservableList<String> newListMemory =
+        FXCollections.observableArrayList(); // NUOVA LISTA CAMPI NON OCCUPATI
 
     Connection conn = ConnectDB.getConnect();
     try {
@@ -142,11 +131,11 @@ public class ControllerAddBooking implements Initializable {
         campo.add(rs.getString("campo"));
       }
 
-      for (String pippo : myComboBoxCampo.getItems()) {
-        for (String pluto : campo) {
-          if (!pippo.equals(pluto)) {
-            nuovaListaCampiNonOccupati.add(pippo);
-      myComboBoxCampo.setItems(nuovaListaCampiNonOccupati);
+      for (String listComboBox : myComboBoxCampo.getItems()) {
+        for (String listCampo : campo) {
+          if (!listComboBox.equals(listCampo)) {
+            newListMemory.add(listComboBox);
+            myComboBoxCampo.setItems(newListMemory);
           }
         }
       }
@@ -157,12 +146,3 @@ public class ControllerAddBooking implements Initializable {
     }
   }
 }
-
-/**
- * QUERY CHE SELEZIONA SOLO LA COLONNA DELL'ORA RIFERITA AL CORRENTE GIORNO SELECT `ora` FROM
- * storico WHERE data = (CURRENT_DATE) ORDER BY data ASC SELECT DISTINCT `ora` FROM storico WHERE
- * data != (CURRENT_DATE) AND `ora` >= 9 AND `ora` <= 19 ORDER BY `ora` ASC
- *
- * <p>insert into public.storico (id,nome,classe,campo,data,ora,cellulare,mail) values(1, 'Mario',
- * '4B', '1 CALCIO', '2021-08-21', '9:00', 3400090663, 'mario@gmail.com')
- */
